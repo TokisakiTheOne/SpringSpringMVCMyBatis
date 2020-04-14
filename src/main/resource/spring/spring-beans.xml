@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+    <!--1.数据源-->
+    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+        <property name="url" value="jdbc:mysql:///springspringmvcmybatis"/>
+        <property name="username" value="root"/>
+        <property name="password" value="12315.qq"/>
+    </bean>
+    <!--2.会话工厂-->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!--2.1 加载数据源-->
+        <property name="dataSource" ref="dataSource"/>
+        <!--2.2加载映射文件-->
+        <property name="mapperLocations" value="classpath*:mybatis/mapper/*Mapper.xml"/>
+    </bean>
+    <!--3.映射器注册-->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!--3.1指定会话工厂-->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!--3.2扫描映射器接口-->
+        <property name="basePackage" value="com.yyh.dao"/>
+    </bean>
+</beans>

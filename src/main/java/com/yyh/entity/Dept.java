@@ -21,4 +21,5 @@ public class Dept {
     public Dept(String dept_name) {
         this.dept_name = dept_name;
     }
+
 }
